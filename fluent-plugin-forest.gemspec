@@ -1,6 +1,6 @@
 # -*- encoding: utf-8 -*-
 Gem::Specification.new do |gem|
-  gem.name          = "fluent-plugin-forest"
+  gem.name          = "fluent-plugin-forest-plntr"
   gem.version       = "0.3.0"
   gem.authors       = ["TAGOMORI Satoshi"]
   gem.email         = ["tagomoris@gmail.com"]
