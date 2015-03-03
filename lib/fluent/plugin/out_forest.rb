@@ -6,6 +6,7 @@ class Fluent::ForestOutput < Fluent::MultiOutput
   config_param :add_prefix, :string, :default => nil
   config_param :hostname, :string, :default => `hostname`.chomp
   config_param :escape_tag_separator, :string, :default => '_'
+  config_param :fail_on_plant_error, :bool, :default => false
 
   attr_reader :outputs
 
@@ -140,11 +141,13 @@ class Fluent::ForestOutput < Fluent::MultiOutput
       log.error "failed to configure sub output #{@subtype}: #{e.message}"
       log.error e.backtrace.join("\n")
       log.error "Cannot output messages with tag '#{tag}'"
+      raise if @fail_on_plant_error
       output = nil
     rescue StandardError => e
       log.error "failed to configure/start sub output #{@subtype}: #{e.message}"
       log.error e.backtrace.join("\n")
       log.error "Cannot output messages with tag '#{tag}'"
+      raise if @fail_on_plant_error
       output = nil
     end
     output
